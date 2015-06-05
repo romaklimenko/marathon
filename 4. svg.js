@@ -14,18 +14,6 @@ xmlhttp.open("GET", url, true);
 xmlhttp.send();
 
 function main(data) {
-	data = data.sort(function (a, b) {
-		if (a.time42km < b.time42km){
-			return -1;
-		}
-		
-		if (a.time42km > b.time42km){
-			return 1;
-		}
-		
-		return 0;
-	});
-	
 	var height = 600;
 	var width = window.innerWidth - 50;
 	
@@ -37,40 +25,10 @@ function main(data) {
 	
 	var s = Snap(width, height);
 	
-	s.text((pxPerMeter * 5000) - 10 + hshift, height - 10, "5K");
-	s.text((pxPerMeter * 10000) - 10 + hshift, height - 10, "10K");
-	s.text((pxPerMeter * 15000) - 10 + hshift, height - 10, "15K");
-	s.text((pxPerMeter * 20000) - 10 + hshift, height - 10, "20K");
-	s.text((pxPerMeter * 25000) - 10 + hshift, height - 10, "25K");
-	s.text((pxPerMeter * 30000) - 10 + hshift, height - 10, "30K");
-	s.text((pxPerMeter * 35000) - 10 + hshift, height - 10, "35K");
-	s.text((pxPerMeter * 40000) - 10 + hshift, height - 10, "40K");
-	
-	s.text(0, (height - (16.9 * pxPerKmH + vshift)), "2:30");
-	s.text(0, (height - (14.06 * pxPerKmH + vshift)), "3:00");
-	s.text(0, (height - (12.04 * pxPerKmH + vshift)), "3:30");
-	s.text(0, (height - (10.56 * pxPerKmH + vshift)), "4:00");
-	s.text(0, (height - (9.38 * pxPerKmH + vshift)), "4:30");
-	s.text(0, (height - (8.43 * pxPerKmH + vshift)), "5:00");
-	
-	var id = -1;
-
-	renderPath();
-	
-	function renderPath() {
-		var element;
-		
-		if (id >= data.length) {
-			return;	
-		}
-		
-		do {
-			id++;
-			element = data[id];
-		} while (id < data.length && (!element || !element.time05km || !element.time10km || !element.time15km || !element.time20km || !element.time25km || !element.time30km || !element.time35km || !element.time40km || !element.time42km));
-		
-		if (!element) {
-			return;
+	for (var i = 0; i < data.length; i++) {
+		var element = data[i];
+		if (!element || !element.time05km || !element.time10km || !element.time15km || !element.time20km || !element.time25km || !element.time30km || !element.time35km || !element.time40km || !element.time42km) {
+			continue;
 		}
 		
 		var time05km = getTime(element.time05km);
@@ -82,6 +40,10 @@ function main(data) {
 		var time35km = getTime(element.time35km);
 		var time40km = getTime(element.time40km);
 		var time42km = getTime(element.time42km);
+		
+		if (!time05km || !time10km || !time15km || !time20km || !time25km || !time30km || !time35km || !time40km || !time42km) {
+			continue;
+		}
 		
 		var speed05 = getSpeed(5,  time05km);
 		var speed10 = getSpeed(10, time10km);
@@ -107,11 +69,25 @@ function main(data) {
 				("L" + ((40000 * pxPerMeter) + hshift) + " " + (height - (speed40 * pxPerKmH + vshift))) +
 				("L" + ((42195 * pxPerMeter) + hshift) + " " + (height - (speed42 * pxPerKmH + vshift))))
 			.attr({ fill: "none", stroke: "#000000", opacity: 0.01, info: info });
-		
-		setTimeout(renderPath, 1);
 	}
-
+	
 	document.getElementById("info").innerHTML = "&nbsp;";
+	
+	s.text((pxPerMeter * 5000) - 10 + hshift, height - 10, "5K");
+	s.text((pxPerMeter * 10000) - 10 + hshift, height - 10, "10K");
+	s.text((pxPerMeter * 15000) - 10 + hshift, height - 10, "15K");
+	s.text((pxPerMeter * 20000) - 10 + hshift, height - 10, "20K");
+	s.text((pxPerMeter * 25000) - 10 + hshift, height - 10, "25K");
+	s.text((pxPerMeter * 30000) - 10 + hshift, height - 10, "30K");
+	s.text((pxPerMeter * 35000) - 10 + hshift, height - 10, "35K");
+	s.text((pxPerMeter * 40000) - 10 + hshift, height - 10, "40K");
+	
+	s.text(0, (height - (16.9 * pxPerKmH + vshift)), "2:30");
+	s.text(0, (height - (14.06 * pxPerKmH + vshift)), "3:00");
+	s.text(0, (height - (12.04 * pxPerKmH + vshift)), "3:30");
+	s.text(0, (height - (10.56 * pxPerKmH + vshift)), "4:00");
+	s.text(0, (height - (9.38 * pxPerKmH + vshift)), "4:30");
+	s.text(0, (height - (8.43 * pxPerKmH + vshift)), "5:00");
 }
 
 function getSpeed(distance, time) {
