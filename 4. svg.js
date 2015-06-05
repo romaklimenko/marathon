@@ -55,7 +55,7 @@ function main(data) {
 		var speed40 = getSpeed(40, time40km);
 		var speed42 = getSpeed(42, time42km);
 		
-		var info = element.race_no + " " + element.name;
+		var info = element.race_no + " " + element.name + " " + element.time42km;
 		
 		var p = s
 			.path(
@@ -68,9 +68,7 @@ function main(data) {
 				("L" + ((35000 * pxPerMeter) + hshift) + " " + (height - (speed35 * pxPerKmH + vshift))) +
 				("L" + ((40000 * pxPerMeter) + hshift) + " " + (height - (speed40 * pxPerKmH + vshift))) +
 				("L" + ((42195 * pxPerMeter) + hshift) + " " + (height - (speed42 * pxPerKmH + vshift))))
-			.attr({ fill: "none", stroke: "#000000", opacity: 0.01, info: info })
-			.mouseover(function () { this.attr({ stroke: "#FF0000", opacity: 1 }); document.getElementById("info").innerHTML = this.attr("info"); })
-			.mouseout(function () { this.attr({ stroke: "#000000", opacity: 0.01 }); document.getElementById("info").innerHTML = "&nbsp;"; });
+			.attr({ fill: "none", stroke: "#000000", opacity: 0.01, info: info });
 	}
 	
 	document.getElementById("info").innerHTML = "&nbsp;";
