@@ -21,15 +21,15 @@ function getDataFromPage() {
 
 	var name = getValue("body > table > tbody > tr > td > table:nth-child(3) > tbody > tr > td:nth-child(1) > span");
 	var race_no = getValue("body > table > tbody > tr > td > table:nth-child(3) > tbody > tr > td:nth-child(2) > span.participant_value_big");
-	var dist5km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(2) > td:nth-child(2)");
-	var dist10km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(3) > td:nth-child(2)");
-	var dist15km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(4) > td:nth-child(2)");
-	var dist20km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(5) > td:nth-child(2)");
-	var dist25km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(7) > td:nth-child(2)");
-	var dist30km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(8) > td:nth-child(2)");
-	var dist35km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(9) > td:nth-child(2)");
-	var dist40km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(10) > td:nth-child(2)");
-	var dist42km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(11) > td:nth-child(2)");
+	var time05km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(2) > td:nth-child(2)");
+	var time10km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(3) > td:nth-child(2)");
+	var time15km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(4) > td:nth-child(2)");
+	var time20km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(5) > td:nth-child(2)");
+	var time25km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(7) > td:nth-child(2)");
+	var time30km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(8) > td:nth-child(2)");
+	var time35km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(9) > td:nth-child(2)");
+	var time40km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(10) > td:nth-child(2)");
+	var time42km = getValue("body > table > tbody > tr > td > table:nth-child(13) > tbody > tr > td > table > tbody > tr:nth-child(11) > td:nth-child(2)");
 
 	if (!name || !race_no) {
 		return;
@@ -38,15 +38,15 @@ function getDataFromPage() {
 	return {
 		"name"    : name,
 		"race_no" : race_no,
-		"dist5km" : dist5km,
-		"dist10km": dist10km,
-		"dist15km": dist15km,
-		"dist20km": dist20km,
-		"dist25km": dist25km,
-		"dist30km": dist30km,
-		"dist35km": dist35km,
-		"dist40km": dist40km,
-		"dist42km": dist42km
+		"time05km": time05km,
+		"time10km": time10km,
+		"time15km": time15km,
+		"time20km": time20km,
+		"time25km": time25km,
+		"time30km": time30km,
+		"time35km": time35km,
+		"time40km": time40km,
+		"time42km": time42km
 	}
 }
 

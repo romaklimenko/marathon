@@ -15,7 +15,7 @@ xmlhttp.send();
 
 function main(data) {
 	var height = 600;
-	var width = 1200;//window.innerWidth - 50;
+	var width = window.innerWidth - 50;
 	
 	var pxPerMeter = width / (42195 - 5000);
 	var pxPerKmH = height / (19 - 6);
@@ -27,19 +27,19 @@ function main(data) {
 	
 	for (var i = 0; i < data.length; i++) {
 		var element = data[i];
-		if (!element || !element.dist5km || !element.dist10km || !element.dist15km || !element.dist20km || !element.dist25km || !element.dist30km || !element.dist35km || !element.dist40km || !element.dist42km) {
+		if (!element || !element.time05km || !element.time10km || !element.time15km || !element.time20km || !element.time25km || !element.time30km || !element.time35km || !element.time40km || !element.time42km) {
 			continue;
 		}
 		
-		var time05km = getTime(element.dist5km);
-		var time10km = getTime(element.dist10km);
-		var time15km = getTime(element.dist15km);
-		var time20km = getTime(element.dist20km);
-		var time25km = getTime(element.dist25km);
-		var time30km = getTime(element.dist30km);
-		var time35km = getTime(element.dist35km);
-		var time40km = getTime(element.dist40km);
-		var time42km = getTime(element.dist42km);
+		var time05km = getTime(element.time05km);
+		var time10km = getTime(element.time10km);
+		var time15km = getTime(element.time15km);
+		var time20km = getTime(element.time20km);
+		var time25km = getTime(element.time25km);
+		var time30km = getTime(element.time30km);
+		var time35km = getTime(element.time35km);
+		var time40km = getTime(element.time40km);
+		var time42km = getTime(element.time42km);
 		
 		if (!time05km || !time10km || !time15km || !time20km || !time25km || !time30km || !time35km || !time40km || !time42km) {
 			continue;
