@@ -14,6 +14,18 @@ xmlhttp.open("GET", url, true);
 xmlhttp.send();
 
 function main(data) {
+	data.sort(function(a, b) {
+		if(a.time42km < b.time42km) {
+			return -1;
+		}
+
+		if(a.time42km > b.time42km) {
+			return 1;
+		}
+
+		return 0;
+	});
+
 	var height = 600;
 	var width = window.innerWidth - 50;
 	
@@ -24,7 +36,7 @@ function main(data) {
 	var vshift = pxPerKmH * -6;
 	
 	var s = Snap(width, height);
-	
+
 	for (var i = 0; i < data.length; i++) {
 		var element = data[i];
 		if (!element || !element.time05km || !element.time10km || !element.time15km || !element.time20km || !element.time25km || !element.time30km || !element.time35km || !element.time40km || !element.time42km) {
@@ -54,21 +66,18 @@ function main(data) {
 		var speed35 = getSpeed(35, time35km);
 		var speed40 = getSpeed(40, time40km);
 		var speed42 = getSpeed(42, time42km);
-		
-		var info = element.race_no + " " + element.name + " " + element.time42km;
-		
-		var p = s
-			.path(
-				("M" +  ((5000 * pxPerMeter) + hshift) + " " + (height - (speed05 * pxPerKmH + vshift))) +
-				("L" + ((10000 * pxPerMeter) + hshift) + " " + (height - (speed10 * pxPerKmH + vshift))) +
-				("L" + ((15000 * pxPerMeter) + hshift) + " " + (height - (speed15 * pxPerKmH + vshift))) +
-				("L" + ((20000 * pxPerMeter) + hshift) + " " + (height - (speed20 * pxPerKmH + vshift))) +
-				("L" + ((25000 * pxPerMeter) + hshift) + " " + (height - (speed25 * pxPerKmH + vshift))) +
-				("L" + ((30000 * pxPerMeter) + hshift) + " " + (height - (speed30 * pxPerKmH + vshift))) +
-				("L" + ((35000 * pxPerMeter) + hshift) + " " + (height - (speed35 * pxPerKmH + vshift))) +
-				("L" + ((40000 * pxPerMeter) + hshift) + " " + (height - (speed40 * pxPerKmH + vshift))) +
-				("L" + ((42195 * pxPerMeter) + hshift) + " " + (height - (speed42 * pxPerKmH + vshift))))
-			.attr({ fill: "none", stroke: "#000000", opacity: 0.01, info: info });
+
+		s.path(
+			("M" +  Math.round(((5000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed05 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((10000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed10 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((15000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed15 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((20000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed20 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((25000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed25 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((30000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed30 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((35000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed35 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((40000 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed40 * pxPerKmH + vshift)) * 100) / 100) +
+			("L" + Math.round(((42195 * pxPerMeter) + hshift) * 100) / 100 + " " + Math.round((height - (speed42 * pxPerKmH + vshift)) * 100) / 100))
+		.attr({ fill: "none", opacity: 0.03, stroke: "#000" });
 	}
 	
 	document.getElementById("info").innerHTML = "&nbsp;";
